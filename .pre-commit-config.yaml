@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: shellcheck
+        name: shellcheck
+        entry: nix develop --command shellcheck
+        language: system
+        files: ^validate\.sh$
+
+  - repo: local
+    hooks:
+      - id: make-build
+        name: make build
+        entry: nix develop --command make clean all
+        language: system
+        pass_filenames: false
+        files: ^(main\.c|Makefile|wlr_vcgt_loader_internal\.h|tests/test_main\.c|protocol/.*\.xml)$
+      - id: binary-help-smoke-test
+        name: binary help smoke test
+        entry: nix develop --command sh -c 'make all && ./wlr-vcgt-loader --help >/dev/null'
+        language: system
+        pass_filenames: false
+        files: ^(main\.c|Makefile|wlr_vcgt_loader_internal\.h|tests/test_main\.c|protocol/.*\.xml)$

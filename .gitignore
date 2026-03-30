@@ -1,0 +1,17 @@
+# Build artifacts (Makefile)
+*.o
+wlr-vcgt-loader
+tests/test-wlr-vcgt-loader
+main-test.o
+wlr-gamma-control-unstable-v1-protocol.c
+wlr-gamma-control-unstable-v1-client-protocol.h
+
+# Build directory
+build/
+*.icc
+
+# Nix build symlink
+result
+
+# Validation data
+vcgt-validation/
