@@ -27,12 +27,38 @@ Or with Nix:
 nix build
 ```
 
+
 For local development and tests:
 
 ```
 nix develop
 make test
 ```
+
+## Optional: enable the Cachix binary cache
+
+Using the public Cachix cache can significantly reduce build time.
+
+If you already have `cachix` installed, run:
+
+```sh
+cachix use tcllama
+```
+
+Or add the cache manually to your Nix settings:
+
+```nix
+nix.settings = {
+  substituters = [
+    "https://tcllama.cachix.org"
+  ];
+  trusted-public-keys = [
+    "tcllama.cachix.org-1:lwfv8+bXn43j8VdlKIlutiX9vHpBfAc0fCkoAJFdbxU="
+  ];
+};
+```
+
+On non-NixOS systems, you can add the equivalent settings to `~/.config/nix/nix.conf`.
 
 ## Usage
 
