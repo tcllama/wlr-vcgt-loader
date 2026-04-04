@@ -13,6 +13,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
+      - name: Install Nix
+        uses: cachix/install-nix-action@96951a368ba55167b55f1c916f7d416bac6505fe # v31.10.3
+
       - name: Set up Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
@@ -22,8 +25,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install pre-commit
-          sudo apt-get update
-          sudo apt-get install -y build-essential pkg-config shellcheck libwayland-dev libwayland-bin liblcms2-dev libcmocka-dev
 
       - name: Run pre-commit
         run: pre-commit run --all-files
